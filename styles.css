@@ -79,10 +79,20 @@ button:active {
 #completeBtn {
     background: #4CAF50;
     border-color: #4CAF50;
+    margin-right: 10px;
 }
 
 #completeBtn:hover {
     background: #45a049;
+}
+
+#cancelBtn {
+    background: #f44336;
+    border-color: #f44336;
+}
+
+#cancelBtn:hover {
+    background: #da190b;
 }
 
 #addTaskForm {
@@ -175,6 +185,7 @@ textarea {
     text-align: center;
     color: #555;
     font-size: 1.2rem;
+    margin-bottom: 40px;
 }
 
 #completedTasks {

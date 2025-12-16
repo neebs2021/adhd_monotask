@@ -48,6 +48,7 @@
         pauseBtn: document.getElementById('pauseBtn'),
         resetBtn: document.getElementById('resetBtn'),
         completeBtn: document.getElementById('completeBtn'),
+        cancelBtn: document.getElementById('cancelBtn'),
         taskForm: document.getElementById('taskForm'),
         addTaskForm: document.getElementById('addTaskForm'),
         completedTasks: document.getElementById('completedTasks'),
@@ -116,6 +117,7 @@
     const timer = {
         start() {
             if (state.timer.isRunning) return;
+            if (!state.currentTask || state.currentTask.originalTimer === 0) return;
 
             state.timer.isRunning = true;
             utils.toggleElement(elements.startBtn, false);
@@ -187,6 +189,15 @@
 
             if (hasTimer) {
                 timer.updateDisplay();
+                // Reset button states to default
+                utils.toggleElement(elements.startBtn, true);
+                utils.toggleElement(elements.pauseBtn, false);
+                utils.toggleElement(elements.resetBtn, true);
+            } else {
+                // Explicitly hide timer control buttons when no timer
+                utils.toggleElement(elements.startBtn, false);
+                utils.toggleElement(elements.pauseBtn, false);
+                utils.toggleElement(elements.resetBtn, false);
             }
         },
 
@@ -252,6 +263,13 @@
             state.completedTasks = [];
             storage.saveCompletedTasks(state.completedTasks);
             ui.displayCompletedTasks();
+        },
+
+        cancelTask() {
+            timer.pause();
+            state.currentTask = null;
+            storage.saveCurrentTask(null);
+            ui.displayTask();
         }
     };
 
@@ -282,6 +300,7 @@
         elements.pauseBtn.addEventListener('click', () => timer.pause());
         elements.resetBtn.addEventListener('click', () => timer.reset());
         elements.completeBtn.addEventListener('click', () => taskManager.completeTask());
+        elements.cancelBtn.addEventListener('click', () => taskManager.cancelTask());
         elements.clearCompletedBtn.addEventListener('click', () => taskManager.clearCompleted());
         elements.taskForm.addEventListener('submit', eventHandlers.handleTaskFormSubmit);
     }
