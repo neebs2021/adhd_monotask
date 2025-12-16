@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MonoTask - Focus on One Thing</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="currentTask" class="hidden">
+            <h1 id="taskTitle"></h1>
+            <p id="taskDescription"></p>
+            <div id="timer">00:00:00</div>
+            <div id="timerControls">
+                <button id="startBtn">Start</button>
+                <button id="pauseBtn" class="hidden">Pause</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+            <button id="completeBtn">Complete Task</button>
+        </div>
+
+        <div id="emptyState">
+            <p>No active task. Add one below to get started.</p>
+        </div>
+
+        <div id="addTaskForm">
+            <h2 id="formTitle">Add New Task</h2>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="title">Task Title *</label>
+                    <input type="text" id="title" required placeholder="What do you need to focus on?">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description (optional)</label>
+                    <textarea id="description" placeholder="Add any details..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Timer (optional)</label>
+                    <div class="timer-input-group">
+                        <div class="input-wrapper">
+                            <input type="number" id="hours" min="0" max="23" placeholder="0" value="0">
+                            <span class="input-label">Hours</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="number" id="minutes" min="0" max="59" placeholder="0" value="0">
+                            <span class="input-label">Minutes</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="number" id="seconds" min="0" max="59" placeholder="0" value="0">
+                            <span class="input-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="submitTask">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="completedTasks" class="hidden">
+        <h3>Completed</h3>
+        <ul id="completedList"></ul>
+        <button id="clearCompleted">Clear All</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
